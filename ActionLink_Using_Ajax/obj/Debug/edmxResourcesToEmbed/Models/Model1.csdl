@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DemoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="emp_mng">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="emp_id" Type="Int32" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK__emp_mng__emp_id__151B244E" FromRole="emp_mng" ToRole="Employee" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="emp_id" />
+    </Key>
+    <Property Name="emp_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="emp_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="desg" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="salary" Type="Double" />
+    <NavigationProperty Name="emp_mng" Relationship="Self.FK__emp_mng__emp_id__151B244E" FromRole="Employee" ToRole="emp_mng" />
+  </EntityType>
+  <EntityType Name="MyTable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Std_mst">
+    <Key>
+      <PropertyRef Name="Roll" />
+    </Key>
+    <Property Name="Roll" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Age" Type="Int32" />
+  </EntityType>
+  <Association Name="FK__emp_mng__emp_id__151B244E">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="emp_mng" Type="Self.emp_mng" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="emp_id" />
+      </Principal>
+      <Dependent Role="emp_mng">
+        <PropertyRef Name="emp_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DemoEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="emp_mng" EntityType="Self.emp_mng" />
+    <EntitySet Name="Employees" EntityType="Self.Employee" />
+    <EntitySet Name="MyTables" EntityType="Self.MyTable" />
+    <EntitySet Name="Std_mst" EntityType="Self.Std_mst" />
+    <AssociationSet Name="FK__emp_mng__emp_id__151B244E" Association="Self.FK__emp_mng__emp_id__151B244E">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="emp_mng" EntitySet="emp_mng" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

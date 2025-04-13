@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p class="text-center m-2">@Ajax.ActionLink("Click Here", "Employee", "Home", new AjaxOptions() { HttpMethod = "get", InsertionMode = InsertionMode.Replace, UpdateTargetId = "msg" })</p>
+<p class="text-center m-2">@Ajax.ActionLink("Top Two salary", "TopTwo", "Home", new AjaxOptions() { HttpMethod = "get", InsertionMode = InsertionMode.Replace, UpdateTargetId = "msg" })</p>
+<p class="text-center m-2">@Ajax.ActionLink("Lowest salary", "LowestTwo", "Home", new AjaxOptions() { HttpMethod = "get", InsertionMode = InsertionMode.Replace, UpdateTargetId = "msg" })</p>
+
+<div id="msg"> </div>
+
+<script src="~/Scripts/jquery-3.7.0.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
